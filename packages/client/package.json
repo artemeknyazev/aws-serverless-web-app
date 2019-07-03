@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "npx webpack",
+    "build:watch": "npm run build -- --watch",
     "check": "npx tsc --project tsconfig.json --noEmit",
-    "pretty": "npx prettier --write src/** public/static/** tsconfig.json tslint.json webpack.config.js .prettierrc.json",
-    "pretty:check": "npx prettier -c src/** public/static/** tsconfig.json tslint.json webpack.config.js .prettierrc.json",
+    "check:watch": "npm run check -- --watch",
+    "prettier": "npx prettier src/** public/static/** tsconfig.json tslint.json webpack.config.js .prettierrc.json",
+    "pretty": "npm run prettier -- --write",
+    "pretty:check": "npm run prettier -- -c",
     "lint": "npx tslint -c tslint.json 'src/**/*'",
     "clean": "npx rimraf ./build",
     "ci": "npx npm-run-all check lint clean build",
@@ -19,7 +22,10 @@
   "license": "MIT",
   "dependencies": {
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-helmet": "^5.2.1",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -29,6 +35,9 @@
     "@types/node": "^12.0.10",
     "@types/react": "^16.8.22",
     "@types/react-dom": "^16.8.4",
+    "@types/react-helmet": "^5.0.8",
+    "@types/react-router": "^5.0.3",
+    "@types/react-router-dom": "^4.3.4",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.3",
     "npm-run-all": "^4.1.5",
