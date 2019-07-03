@@ -1,0 +1,21 @@
+{
+  "name": "aws-serverless-web-app",
+  "scripts": {
+    "npm-for-each": "bash scripts/npm-for-each.sh"
+  },
+  "devDependencies": {
+    "husky": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artemeknyazev/aws-serverless-web-app.git"
+  },
+  "author": "Artem E. Knyazev <artem.e.knyazev@yandex.ru>",
+  "license": "MIT",
+  "homepage": "https://github.com/artemeknyazev/aws-serverless-web-app#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run npm-for-each -- run pre-commit --if-exists"
+    }
+  }
+}
