@@ -5,7 +5,8 @@
     "pretty": "npm run npm-for-each -- run pretty",
     "lint": "npm run npm-for-each -- run lint",
     "check": "npm run npm-for-each -- run check",
-    "postinstall": "npm run npm-for-each -- install"
+    "postinstall": "npm run npm-for-each -- install",
+    "ci": "npm run npm-for-each -- run ci"
   },
   "devDependencies": {
     "husky": "^3.0.0"
