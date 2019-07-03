@@ -8,7 +8,7 @@
     "build:watch": "npm run build -- --watch",
     "check": "npx tsc --project tsconfig.json --noEmit",
     "check:watch": "npm run check -- --watch",
-    "prettier": "npx prettier src/** public/static/** tsconfig.json tslint.json webpack.config.js .prettierrc.json",
+    "prettier": "npx prettier src/** public/** tsconfig.json tslint.json webpack.config.js .prettierrc.json",
     "pretty": "npm run prettier -- --write",
     "pretty:check": "npm run prettier -- -c",
     "lint": "npx tslint -c tslint.json 'src/**/*'",

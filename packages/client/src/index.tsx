@@ -36,10 +36,7 @@ const Header = () => (
 
 const App = () => (
   <Router>
-    <Helmet
-      defaultTitle='S3rv3r1355'
-      titleTemplate='S3rv3r1355 — %s'
-    />
+    <Helmet defaultTitle='S3rv3r1355' titleTemplate='S3rv3r1355 — %s' />
     <Header />
     <Route path='/' exact component={MainPage} />
     <Route path='/contacts' exact component={ContactsPage} />
