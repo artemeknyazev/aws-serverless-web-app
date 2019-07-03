@@ -1,7 +1,11 @@
 {
   "name": "aws-serverless-web-app",
   "scripts": {
-    "npm-for-each": "bash scripts/npm-for-each.sh"
+    "npm-for-each": "bash scripts/npm-for-each.sh --if-exists",
+    "pretty": "npm run npm-for-each -- run pretty",
+    "lint": "npm run npm-for-each -- run lint",
+    "check": "npm run npm-for-each -- run check",
+    "postinstall": "npm run npm-for-each -- install"
   },
   "devDependencies": {
     "husky": "^3.0.0"
@@ -15,7 +19,7 @@
   "homepage": "https://github.com/artemeknyazev/aws-serverless-web-app#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "npm run npm-for-each -- run pre-commit --if-exists"
+      "pre-commit": "npm run npm-for-each -- run pre-commit"
     }
   }
 }

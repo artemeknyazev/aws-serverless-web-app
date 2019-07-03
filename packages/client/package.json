@@ -7,10 +7,11 @@
     "build": "npx webpack",
     "check": "npx tsc --project tsconfig.json --noEmit",
     "pretty": "npx prettier --write src/** public/static/** tsconfig.json tslint.json webpack.config.js .prettierrc.json",
+    "pretty:check": "npx prettier -c src/** public/static/** tsconfig.json tslint.json webpack.config.js .prettierrc.json",
     "lint": "npx tslint -c tslint.json 'src/**/*'",
     "clean": "npx rimraf ./build",
     "ci": "npx npm-run-all check lint clean build",
-    "pre-commit": "npx npm-run-all pretty lint check",
+    "pre-commit": "npx npm-run-all pretty:check lint check",
     "serve": "http-server ./build -p 8080"
   },
   "keywords": [],

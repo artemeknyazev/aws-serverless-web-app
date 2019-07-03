@@ -35,7 +35,8 @@ module.exports = {
       {
         from: path.resolve(__dirname, 'public', 'static'),
         to: path.resolve(__dirname, 'build', 'static')
-      }, {
+      },
+      {
         from: path.resolve(__dirname, 'public', 'index.html'),
         to: path.resolve(__dirname, 'build', 'index.html')
       }
