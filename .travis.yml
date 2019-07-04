@@ -2,9 +2,9 @@ language: node_js
 node_js:
   - lts/*
 dist: xenial
-#git:
-#  depth: 1
-#  quiet: true
+git:
+  depth: 1
+  quiet: true
 branches:
   only:
     - master
@@ -13,7 +13,10 @@ script: NODE_ENV=production npm run ci
 deploy:
   provider: s3
   bucket: arkny-aws-serverless-web-app
+  region: us-east-2
+  local_dir: "packages/client/build"
   acl: public_read
+  skip_cleanup: true
   access_key_id:
     secure: PbPHfBu748Xm2tA4yCWlA7uzq1H4AMxugqLIgizSUF565yvt9uQaAheT1M61B//TNK2V6AbMEidC5EMpGC5lzbVrenw8rEaJiC29esNhpXZyoYRLM/f7qYZOVzb8CqNw+hIffL88F2RHoMVXK0fYq7Ko/27jW1oOsS597EIj9jn/vzJ9FjYprn/eroPkDIsjnPva7vTeMKYThdyDJA09pEW1ZHDAUF9fWYRton2jITxRi+znmUqx+A0SlPbp67C9fg/Z5sWI09A9m1xho82mZL16IwTVHD6q2RX1Q8FVWUN8J+TZn0Aru5ajgIqyNC9uHmg/CiBTKM6d6s/04KxxtOKZd2gcHqE/hF++UZhbvJdscNtIfO39xBVubOgtPfAb25qB1XkwvJRyLVCWe2KlViPqrvfaMg5YQJCP7aI04X+Cy9JuqrSJLtKpA3WmQyO8qW+Zz67BkwL9wu8eLllg4tVRs8m1mhVFGlzINzeNrSFNOlz+55dJ2r5BMHq6gKPPaA/QlOrhV1itCeYD/0I/X04NRsskjNnT2niyKyYSmXEJtU57G7HvbBtqjG3+gfanuyFSWCbjIkFMdHlpL8X6YMF+ewz4CT7uXcWPMfqM83bFe7zk3x39TwUDENTD6mStgSHSwuPvKXoHBM+zQlqvp1aalig0WneT/xJUpkACekc=
   secret_access_key:
