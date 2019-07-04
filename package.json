@@ -20,7 +20,7 @@
   "homepage": "https://github.com/artemeknyazev/aws-serverless-web-app#readme",
   "husky": {
     "hooks": {
-      "pre-commit": "npm run npm-for-each -- run pre-commit"
+      "pre-commit": "npm run npm-for-each -- run pre-commit --if-present"
     }
   }
 }
