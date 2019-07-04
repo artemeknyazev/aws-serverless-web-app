@@ -23,7 +23,7 @@
     "paths": {},
     "rootDirs": [],
     "typeRoots": ["node_modules/@types"],
-    "types": [],
+    "types": ["node"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "preserveSymlinks": true,
