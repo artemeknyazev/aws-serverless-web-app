@@ -1,12 +1,12 @@
 {
   "name": "aws-serverless-web-app",
   "scripts": {
-    "npm-for-each": "bash scripts/npm-for-each.sh --if-exists",
-    "pretty": "npm run npm-for-each -- run pretty",
-    "lint": "npm run npm-for-each -- run lint",
-    "check": "npm run npm-for-each -- run check",
+    "npm-for-each": "bash scripts/npm-for-each.sh",
+    "pretty": "npm run npm-for-each -- run pretty --if-present",
+    "lint": "npm run npm-for-each -- run lint --if-present",
+    "check": "npm run npm-for-each -- run check --if-present",
     "postinstall": "npm run npm-for-each -- install",
-    "ci": "npm run npm-for-each -- run ci"
+    "ci": "npm run npm-for-each -- run ci --if-present"
   },
   "devDependencies": {
     "husky": "3.0.0"
