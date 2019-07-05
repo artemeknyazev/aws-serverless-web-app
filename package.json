@@ -5,6 +5,7 @@
     "pretty": "npm run npm-for-each -- run pretty --if-present",
     "lint": "npm run npm-for-each -- run lint --if-present",
     "check": "npm run npm-for-each -- run check --if-present",
+    "clean": "npm run npm-for-each -- run clean --if-present",
     "postinstall": "npm run npm-for-each -- install",
     "ci": "npm run npm-for-each -- run ci --if-present"
   },
