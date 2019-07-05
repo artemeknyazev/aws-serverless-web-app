@@ -12,8 +12,8 @@ set -eu -o pipefail;
 #        who is allowed write access to S3/Lambda/etc.
 #
 
-CLIENT_S3_BUCKET_NAME="arkny-aws-serverless-web-app"
-CLIENT_S3_BUCKET_REGION="us-east-2"
+WEB_CLIENT_S3_BUCKET_NAME="arkny-aws-serverless-web-app"
+WEB_CLIENT_S3_BUCKET_REGION="us-east-2"
 RENDER_SERVER_FUNCTION_NAME="arkny-aws-serverless-web-app-render-server"
 RENDER_SERVER_FUNCTION_REGION="us-east-2"
 
@@ -26,18 +26,18 @@ PACKAGES_PATH=`pwd`
 echo Deploying packages from $PACKAGES_PATH
 
 echo
-echo "--> Step: upload client to S3 bucket"
+echo "--> Step: upload web client static files"
 echo
 
 aws s3 cp \
-	./client/build \
-	s3://$CLIENT_S3_BUCKET_NAME \
+	./web-client/build \
+	s3://$WEB_CLIENT_S3_BUCKET_NAME \
 	--grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
 	--recursive \
-	--region $CLIENT_S3_BUCKET_REGION
+	--region $WEB_CLIENT_S3_BUCKET_REGION
 
 echo
-echo "--> Step: deploy lambda"
+echo "--> Step: deploy render server"
 echo
 
 cd $PACKAGES_PATH/render-server/build
