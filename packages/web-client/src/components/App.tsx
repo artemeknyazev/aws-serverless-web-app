@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  Link
-} from 'react-router-dom';
+import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
 const MainPage = () => (
@@ -57,7 +51,7 @@ const Header = () => (
 );
 
 const App = () => (
-  <Router>
+  <React.Fragment>
     <Helmet defaultTitle='S3rv3r1355' titleTemplate='S3rv3r1355 &mdash; %s' />
     <Header />
     <Switch>
@@ -67,7 +61,7 @@ const App = () => (
       <Route path='/error' exact component={InternalErrorPage} />
       <Redirect to='/not-found' />
     </Switch>
-  </Router>
+  </React.Fragment>
 );
 
 export default App;

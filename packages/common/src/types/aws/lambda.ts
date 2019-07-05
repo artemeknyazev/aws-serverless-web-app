@@ -218,3 +218,22 @@ export interface IAWSLambdaContext {
    */
   callbackWaitsForEmptyEventLoop: boolean;
 }
+
+export interface IAWSAPIGatewayResponse {
+  /**
+   * HTTP response status code. E.g. 200
+   */
+  statusCode?: number;
+
+  /**
+   * HTTP response body
+   */
+  body?: string;
+
+  /**
+   * HTTP response headers
+   */
+  headers?: {
+    [header: string]: string;
+  };
+}

@@ -8,7 +8,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'lambda.js',
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx']

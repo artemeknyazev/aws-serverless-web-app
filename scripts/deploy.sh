@@ -30,7 +30,7 @@ echo "--> Step: upload web client static files"
 echo
 
 aws s3 cp \
-	./web-client/build \
+	./web-client/build/web-client \
 	s3://$WEB_CLIENT_S3_BUCKET_NAME \
 	--grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
 	--recursive \
@@ -40,9 +40,10 @@ echo
 echo "--> Step: deploy render server"
 echo
 
-cd $PACKAGES_PATH/render-server/build
+cd $PACKAGES_PATH/web-client/build/render-server
 zip -q lambda.zip lambda.js
 aws lambda update-function-code \
   --function-name $RENDER_SERVER_FUNCTION_NAME \
   --zip-file fileb://lambda.zip \
   --region $RENDER_SERVER_FUNCTION_REGION
+cd $PACKAGES_PATH

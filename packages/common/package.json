@@ -1,0 +1,7 @@
+{
+  "name": "common",
+  "version": "0.0.1",
+  "description": "Common types/modules",
+  "author": "Artem E. Knyazev <artem.e.knyazev@yandex.ru>",
+  "license": "MIT"
+}
