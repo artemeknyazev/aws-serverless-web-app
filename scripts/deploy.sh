@@ -2,17 +2,32 @@
 
 set -eu -o pipefail;
 
+# This script deploys the whole project. It assumes that
+# all buckets/functions are present
+#
+# Requirements:
+#   - Environment variables
+#      - AWS_ACCESS_KEY_ID,
+#      - AWS_SECRET_ACCESS_KEY - should be of the user
+#        who is allowed write access to S3/Lambda/etc.
+#
+
 CLIENT_S3_BUCKET_NAME="arkny-aws-serverless-web-app"
 CLIENT_S3_BUCKET_REGION="us-east-2"
+RENDER_SERVER_FUNCTION_NAME="arkny-aws-serverless-web-app-render-server"
+RENDER_SERVER_FUNCTION_REGION="us-east-2"
 
-if [[ "${AWS_ACCESS_KEY_ID}" -eq "" ]] || [[ "${AWS_SECRET_ACCESS_KEY}" -eq "" ]]; then
-  echo "deploy.sh: specify AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY before running this script"
-  exit 1
-fi
+echo "AWS CLI located at `which aws`"
+which aws # Will fail if aws command is not present
 
-cd "${BASH_SOURCE%/*}/../packages";
+cd ${BASH_SOURCE%/*}/../packages;
+PACKAGES_PATH=`pwd`
 
-echo "Step: upload client to S3 bucket"
+echo Deploying packages from $PACKAGES_PATH
+
+echo
+echo "--> Step: upload client to S3 bucket"
+echo
 
 aws s3 cp \
 	./client/build \
@@ -21,7 +36,13 @@ aws s3 cp \
 	--recursive \
 	--region $CLIENT_S3_BUCKET_REGION
 
-if [[ "$?" -ne "0" ]]; then
-  echo "Error: failed to upload files"
-  exit 1
-fi
+echo
+echo "--> Step: deploy lambda"
+echo
+
+cd $PACKAGES_PATH/render-server/build
+zip -q lambda.zip lambda.js
+aws lambda update-function-code \
+  --function-name $RENDER_SERVER_FUNCTION_NAME \
+  --zip-file fileb://lambda.zip \
+  --region $RENDER_SERVER_FUNCTION_REGION

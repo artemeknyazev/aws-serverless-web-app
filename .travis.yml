@@ -8,23 +8,19 @@ git:
 branches:
   only:
     - master
-cache: npm
-script: NODE_ENV=production npm run ci
+cache:
+  - npm
+  - directories:
+    - $HOME/.local
+before_install:
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
+install:
+  - npm i
+script:
+  - NODE_ENV=production npm run ci
 deploy:
-  - provider: s3
-    bucket: arkny-aws-serverless-web-app
-    region: us-east-2
-    local_dir: "packages/client/build"
-    acl: public_read
-    skip_cleanup: true
-    access_key_id:
-      secure: PbPHfBu748Xm2tA4yCWlA7uzq1H4AMxugqLIgizSUF565yvt9uQaAheT1M61B//TNK2V6AbMEidC5EMpGC5lzbVrenw8rEaJiC29esNhpXZyoYRLM/f7qYZOVzb8CqNw+hIffL88F2RHoMVXK0fYq7Ko/27jW1oOsS597EIj9jn/vzJ9FjYprn/eroPkDIsjnPva7vTeMKYThdyDJA09pEW1ZHDAUF9fWYRton2jITxRi+znmUqx+A0SlPbp67C9fg/Z5sWI09A9m1xho82mZL16IwTVHD6q2RX1Q8FVWUN8J+TZn0Aru5ajgIqyNC9uHmg/CiBTKM6d6s/04KxxtOKZd2gcHqE/hF++UZhbvJdscNtIfO39xBVubOgtPfAb25qB1XkwvJRyLVCWe2KlViPqrvfaMg5YQJCP7aI04X+Cy9JuqrSJLtKpA3WmQyO8qW+Zz67BkwL9wu8eLllg4tVRs8m1mhVFGlzINzeNrSFNOlz+55dJ2r5BMHq6gKPPaA/QlOrhV1itCeYD/0I/X04NRsskjNnT2niyKyYSmXEJtU57G7HvbBtqjG3+gfanuyFSWCbjIkFMdHlpL8X6YMF+ewz4CT7uXcWPMfqM83bFe7zk3x39TwUDENTD6mStgSHSwuPvKXoHBM+zQlqvp1aalig0WneT/xJUpkACekc=
-    secret_access_key:
-      secure: BZ+upEjWvUM5JdtQBUWYoaBPUtTYwTeYLHNHQRxy5xQ7LWFMWWXFgC5nH2EvAHeNDayCm/+N64D60B+OHWA6g6X9RiYSogHxcOe2n+15uC31nShPfEthMkBvFS4PXjp04yyPvQzO8GGPZdhmgjlMU9N2/gYvNCw75YQpVjx44EuXCQ6y3Pug+tU8H3UMDF8ON2oEmtX4F7kCoDdqa93A+LKKUstX5aHJxOcvJ0IYjg3GdAUM+5bvb2+xNtmEX6UQYfF3hGAGVxZjhg3BLy2kw2zDlDd1uMwDY8kH1uCtDG1JzVvTKou4oxXhwUMG0qPt5IMnTzzuAh1H+W/xzokdVUOzwaqLp8ee+/xnfKuusMH8W2IDAUuJOZJDCSU2BEHJLa/7RRZ+J2YoOSbTqQ40eQzawoVpIP/AbwTjm/J+5C/BtdcrU9F3Rb4dtqkax79q96Rh5LKzCys/b+9nLt4mj015i2AlcPJ1btrBSBEa+3EpL4clTPoDoFKzv8oseY+OsRVmxnhm9Gx0SON9h2yyaIuxQD2m50BGtPbESaZtgdoxkkgIegiWQdatIpWxKtFIDZ/bClTQqnOKKwQ2wN3EZVGhsuufj9JX6VxK1FU93/W2GHEF1rUgaQp1j+3FBJESVtdZhwmptpI8BgmatN5RfcenADm9Z3BZsTRPye9Cszc=
-  - provider: lambda
-    function_name: arkny-aws-serverless-web-app-render-server
-    role: arkny-aws-serverless-web-app-render-server-role-72y3zxo2
-    region: us-east-2
-    skip_cleanup: true
-    zip: "packages/render-server/build"
-    handler_name: "handler"
+  - provider: script
+    script: bash ./scripts/deploy.sh
+    on:
+      branch: master
