@@ -4,7 +4,7 @@ const mode = process.env.NODE_ENV || 'development';
 const isProduction = mode === 'production';
 
 const webClientConfig = {
-  entry: path.resolve(__dirname, 'src', 'index.tsx'),
+  entry: path.resolve(__dirname, 'src', 'web-client', 'index.tsx'),
   target: 'web',
   mode,
   output: {
@@ -35,17 +35,13 @@ const webClientConfig = {
       {
         from: path.resolve(__dirname, 'public', 'static'),
         to: path.resolve(__dirname, 'build', 'web-client', 'static')
-      },
-      {
-        from: path.resolve(__dirname, 'public', 'index.html'),
-        to: path.resolve(__dirname, 'build', 'web-client', 'index.html')
       }
     ])
   ]
 };
 
 const renderServerConfig = {
-  entry: path.resolve(__dirname, 'src', 'server', 'index.tsx'),
+  entry: path.resolve(__dirname, 'src', 'render-server', 'index.tsx'),
   target: 'node',
   mode,
   output: {
