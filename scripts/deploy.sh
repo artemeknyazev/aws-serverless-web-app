@@ -30,11 +30,11 @@ echo "--> Step: upload web client static files"
 echo
 
 aws s3 cp \
-	./web-client/build/web-client \
-	s3://$WEB_CLIENT_S3_BUCKET_NAME \
-	--grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
-	--recursive \
-	--region $WEB_CLIENT_S3_BUCKET_REGION
+  ./web-client/build/web-client \
+  s3://$WEB_CLIENT_S3_BUCKET_NAME \
+  --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers \
+  --recursive \
+  --region $WEB_CLIENT_S3_BUCKET_REGION
 
 echo
 echo "--> Step: deploy render server"

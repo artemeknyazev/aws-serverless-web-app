@@ -16,6 +16,12 @@ const config = convict({
     default: '',
     env: 'APP_PUBLIC_HTML',
     format: String
+  },
+  basename: {
+    doc: 'Router basename',
+    default: '',
+    env: 'APP_ROUTER_BASENAME',
+    format: String
   }
 });
 

@@ -7,7 +7,8 @@
     "check": "npm run npm-for-each -- run check --if-present",
     "clean": "npm run npm-for-each -- run clean --if-present",
     "postinstall": "npm run npm-for-each -- install",
-    "ci": "npm run npm-for-each -- run ci --if-present"
+    "ci": "npm run npm-for-each -- run ci --if-present",
+    "build": "npm run npm-for-each -- run build --if-present"
   },
   "devDependencies": {
     "husky": "3.0.0"

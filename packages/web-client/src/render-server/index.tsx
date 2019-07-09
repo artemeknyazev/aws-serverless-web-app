@@ -10,9 +10,16 @@ import {
 } from 'common/src/types/aws/lambda';
 import config from '../config/render-server';
 
-function renderAppHtml(location: string, context: any): string {
+function renderAppHtml(
+  location: string,
+  context: any,
+  basename?: string
+): string {
   return renderToString(
-    <StaticRouter location={location} context={context}>
+    <StaticRouter
+      location={location}
+      context={context}
+      basename={basename || ''}>
       <App />
     </StaticRouter>
   );
@@ -53,6 +60,7 @@ export async function handler(
 ): Promise<IAWSAPIGatewayResponse> {
   console.log('request', {
     path: event.path,
+    resource: event.resource,
     httpMethod: event.httpMethod,
     headers: event.headers,
     queryStringParameters: event.queryStringParameters,
@@ -69,7 +77,7 @@ export async function handler(
   // TODO: prepare with query params&hash
   const location = event.path;
   const routerContext: any = {};
-  const appHtml = renderAppHtml(location, routerContext);
+  const appHtml = renderAppHtml(location, routerContext, config.basename);
 
   if (routerContext.url) {
     // TODO: configure response status code in component
@@ -89,6 +97,9 @@ export async function handler(
 
   return {
     statusCode: 200,
-    body: pageHtml
+    body: pageHtml,
+    headers: {
+      'Content-Type': 'text/html'
+    }
   };
 }
